@@ -1,6 +1,7 @@
 
 const express = require( 'express' );
 const app = express();
+const path = require("path");
 const port = 3001;
 
 const MongoClient = require('mongodb').MongoClient;
@@ -16,13 +17,6 @@ app.get( "/api/hurricanes", ( req, res )  =>
             db.close();
         });
 }) );
-
-app.listen( port, () => console.log( 'Listening on port: ' + port ) );
-
-const express = require('express');
-const path = require("path");
-
-const app = express();
 
 if (process.env.NODE_ENV === "production") {
     // Express will serve up production assets
