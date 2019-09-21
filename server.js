@@ -1,8 +1,7 @@
-
-const express = require( 'express' );
-const app = express();
+const express = require('express');
 const path = require("path");
-const port = 3001;
+
+const app = express();
 
 const MongoClient = require('mongodb').MongoClient;
 const mongoURL = "mongodb+srv://cy5914:hello123@disastervision-qrwaf.mongodb.net/test?retryWrites=true&w=majority";

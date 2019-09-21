@@ -8006,6 +8006,13 @@ react-is@^16.8.1, react-is@^16.8.4:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.9.0.tgz#21ca9561399aad0ff1a7701c01683e8ca981edcb"
   integrity sha512-tJBzzzIgnnRfEm046qRcURvwQnZVXmuCbscxUO5RWrGTXpon2d4c8mI0D8WE6ydVIm29JiLB6+RslkIvym9Rjw==
 
+react-particles-js@^2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/react-particles-js/-/react-particles-js-2.7.0.tgz#1b13a85d948e63016cb2b400f734758b0a985727"
+  integrity sha512-gsYIr55plOMB6nZW2iBjgXoqOZqBvggW9trNTk0mYHkvqQUpuxhcCDGwRwnts10XQ442PjzxZbklwMlhSOcfgA==
+  dependencies:
+    lodash "^4.17.11"
+
 react-scripts@3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-3.1.2.tgz#40b166d380bfd8b425a41dee96e8e725c82bf9e6"
@@ -9926,11 +9933,6 @@ wide-align@^1.1.0:
   integrity sha512-QGkOQc8XL6Bt5PwnsExKBPuMKBxnGxWWW3fU55Xt4feHozMUhdUMaBCk290qpm/wG5u/RSKzwdAC4i51YigihA==
   dependencies:
     string-width "^1.0.2 || 2"
-
-win-node-env@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/win-node-env/-/win-node-env-0.4.0.tgz#2d9dc991702920c73eaa1d644655b773886da5cb"
-  integrity sha512-bf4TV/NOBEazlHJW/bOns7u2JaHe3f5bz8BYanm/xuqJ405NG9OK3VAI1Y2WvHJsAo4GMU8EYTHSh59Q3UfHvA==
 
 wordwrap@~0.0.2:
   version "0.0.3"
