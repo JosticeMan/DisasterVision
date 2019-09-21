@@ -3,7 +3,7 @@ import React from 'react';
 // import './App.css';
 //import {GoogleMap, withScriptjs, withGoogleMap} from "react-google-maps";
 import GoogleMapReact from 'google-map-react';
-import Marker from '../Marker';
+import Marker from './components/Markers/Marker';
 import Landing from "./Landing.js";
 
 
