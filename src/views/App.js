@@ -1,9 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 // import './App.css';
 //import {GoogleMap, withScriptjs, withGoogleMap} from "react-google-maps";
 import GoogleMapReact from 'google-map-react';
-import Marker from './Marker';
+import Marker from './components/Markers/Marker';
+import Landing from "./Landing.js";
 
 
 class SimpleMap extends React.Component {
@@ -37,8 +38,6 @@ class SimpleMap extends React.Component {
         );
     }
 }
-
-import Landing from "./Landing.js";
 
 function App() {
   return (
