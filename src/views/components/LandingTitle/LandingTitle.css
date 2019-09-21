@@ -1,0 +1,23 @@
+#lt-div {
+    height: 20vh;
+    width: 100vw;
+    position: relative;
+}
+
+#lt-img {
+    height: 100%;
+    width: 40vw;
+}
+
+@media (min-width: 769px) {
+
+    #lt-img {
+        width: 40vw;
+    }
+}
+
+@media (max-width: 768px ) {
+    #lt-img {
+        width: 60vw;
+    }
+}
