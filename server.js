@@ -1,3 +1,4 @@
+
 const express = require('express');
 const path = require("path");
 
@@ -21,22 +22,27 @@ app.get( "/api/Hurricanes/*", ( req, res )  =>
 }) );
 
 /**
- * Format: /api/Earthquakes/<latitude>/<longitute>/<radius(km)>
+ * Format: /api/Earthquakes/<latitude>/<longitute>
  */
 app.get( "/api/Earthquakes/*", ( req, res ) => {
-   var curURL = req.url.split( "/" );
-   var len = curURL.length;
-   var r = curURL[ len - 1 ];
-   var lng = curURL[ len - 2 ];
-   var lat = curURL[ len - 3 ];
-   var URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson" + "&limit=" + 20
-    + "&latitude=" + lat + "&longitude=" + lng + "&maxradiuskm=" + r;
-   request( URL, function (error, response, body) {
-       if (!error && response.statusCode == 200) {
-           var info = JSON.parse(body);
-           res.send(info);
-       }
-   });
+    var curURL = req.url.trim("/");
+    curURL = curURL.split( "/" );
+    var len = curURL.length;
+    var lng = curURL[ len - 1 ];
+    var lat = curURL[ len - 2 ];
+
+    var today = new Date();
+    var d = today.getDate();
+    var m = today.getMonth() + 1;
+    var y = today.getFullYear();
+    var date = '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+    var URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson" + "&limit=" + 20
+     + "&latitude=" + lat + "&longitude=" + lng + "&maxradiuskm=" + 500 + "&endtime=" + date;
+
+    var unirest = require( 'unirest' );
+    unirest.get( URL, function (req) {
+        res.send(req.body);
+    });
 });
 
 if (process.env.NODE_ENV === "production") {
