@@ -1,7 +1,10 @@
 import React from "react";
 import GoogleMapReact from "../../App";
 
+import Marker from "../Markers/Marker.js";
+
 class SimpleMap extends React.Component {
+
     static defaultProps = {
         center: {
             lat: 37.7749,
