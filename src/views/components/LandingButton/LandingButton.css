@@ -1,0 +1,25 @@
+#linkbtn {
+    height: 10vh;
+    font-size: 50px;
+    color: black;
+}
+
+#link {
+    text-decoration: none;
+    color: lightcyan;
+    font-size: calc(1.5vw + 1.5vh);
+}
+
+@media (min-width: 769px) {
+
+   #link {
+       font-size: 3.5vw;
+   }
+}
+
+@media (max-width: 768px ) {
+
+    #link {
+        font-size: 5vw;
+    }
+}

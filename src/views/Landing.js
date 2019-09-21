@@ -10,7 +10,10 @@ class Landing extends Component {
         return (
             <div id="lpg">
                 <ParticleBackground />
-                <LandingButton />
+                <div id="lpg-flex">
+                    <LandingTitle />
+                    <LandingButton />
+                </div>
             </div>
         );
     }
