@@ -9,7 +9,8 @@ const mongoURL = "mongodb+srv://cy5914:hello123@disastervision-qrwaf.mongodb.net
 
 app.get( "/api/Hurricanes/*", ( req, res )  =>
     MongoClient.connect( mongoURL, function(err, db) {
-        var curURL = req.url.split("/");
+        var curURL = req.url.trim( "/" );
+        curURL = curURL.split( "/" );
         // var type = curURL[ curURL.length - 2 ]; // Hurricanes | Earthquakes
         var loc = curURL[ curURL.length - 1 ]; // Florida, California, etc
         var dbo = db.db("Disasters");
@@ -41,7 +42,7 @@ app.get( "/api/Earthquakes/*", ( req, res ) => {
 
     var unirest = require( 'unirest' );
     unirest.get( URL, function (req) {
-        res.send(req.body);
+        res.status( req.status).json(req.body) ;
     });
 });
 
