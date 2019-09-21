@@ -23,8 +23,8 @@ class SimpleMap extends React.Component {
                     bootstrapURLKeys={{key: 'AIzaSyD63DJnMsk_0ukVFEoA4hm-AkfnoE4a_3c'}}
                     defaultCenter={this.props.center}
                     defaultZoom={this.props.zoom}
-                    heatmapLibrary = {true}
-                    heatmap = {heatmapData}
+                    heatmapLibrary={true}
+                    heatmap={heatmapData}
                 >
                     <Marker
                         lat={37.7749}
@@ -36,6 +36,26 @@ class SimpleMap extends React.Component {
             </div>
         );
     }
+}
+
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
 }
 
  const heatmapData = {
