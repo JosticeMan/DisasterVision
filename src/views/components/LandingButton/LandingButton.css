@@ -7,7 +7,7 @@
 #link {
     text-decoration: none;
     color: lightcyan;
-    font-size: 3vw;
+    font-size: calc(1.5vw + 1.5vh);
 }
 
 @media (min-width: 769px) {
