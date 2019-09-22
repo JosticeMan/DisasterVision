@@ -6,7 +6,7 @@ import BackButton from "./components/BackButton/BackButton.js";
 import "../styles/MapView.css";
 
 class MapView extends Component {
-    
+
     render() {
         return (
             <div>

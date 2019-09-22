@@ -1,0 +1,16 @@
+.toggle-button {
+    position: absolute;
+    top: 1.5vh;
+    right: 0;
+    margin-right: 5vw;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 4px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 2vw;
+}
+
+.toggle-button:hover {
+    color: rgb(131, 225, 225);
+}
