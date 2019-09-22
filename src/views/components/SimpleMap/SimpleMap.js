@@ -15,10 +15,11 @@ class SimpleMap extends React.Component {
             hurricanes : [],
             earthquakes: [],
             heatMapData: {positions: []}, 
-            loading : true      
+            loading : true,
+            showEarthquakes : false,
+            showHurricanes : true,
         };
-        this.getHurr(); 
-        this.getEQ();
+        this.getHurr();
     }
 
     static defaultProps = {
@@ -171,7 +172,7 @@ class SimpleMap extends React.Component {
         if(this.state.loading){
             return <div> </div>
         }
-        else{
+        else if(this.state.showEarthquakes && !this.state.loading) {
             //US BOUNDS
             const bounds = {
                 nw: {
@@ -203,7 +204,7 @@ class SimpleMap extends React.Component {
                         options = {this.mapOptions}
                     >
                         {this.state.hurricanes.map((disaster) => (
-                            <Marker 
+                            <Marker
                                 lat = {parseFloat(disaster.lat)}
                                 lng = {parseFloat(disaster.lng)}
                                 name = "things"
@@ -216,6 +217,71 @@ class SimpleMap extends React.Component {
                             </Marker>
                         ))}
                     </GoogleMapReact>
+                    <button className="toggle-button"
+                            onClick={() => {
+                        this.setState({
+                            showHurricanes: true,
+                            showEarthquakes: false,
+                            loading: true,
+                        });
+                        this.getHurr();
+                        this.render();
+                    }}>Hurricanes</button>
+                </div>
+            );
+        } else if(this.state.showHurricanes && !this.state.loading) {
+            //US BOUNDS
+            const bounds = {
+                nw: {
+                    lat: 24.9493,
+                    lng: -125.0011
+                },
+                se: {
+                    lat: 49.5904,
+                    lng: -75.3326//-66.9326
+                }
+            };
+            //Throwaway for bounds
+            const lasize = {
+                width: 700,
+                height: 500
+            }
+            //Get Center
+            const lacenter = fitBounds(bounds, lasize);
+
+            return (
+                // Important! Always set the container height explicitly
+                <div style = {{height: "100vh", width: "100%"}}>
+                    <GoogleMapReact
+                        bootstrapURLKeys={{key: 'AIzaSyD63DJnMsk_0ukVFEoA4hm-AkfnoE4a_3c'}}
+                        defaultCenter={lacenter.center}
+                        defaultZoom={this.props.zoom}
+                        heatmapLibrary={true}
+                        heatmap={this.state.heatMapData}
+                        options = {this.mapOptions}
+                    >
+                        {console.log(this.state.hurricanes)}
+                        {this.state.hurricanes.map((disaster) => (
+                            <Marker
+                                lat = {parseFloat(disaster.lat)}
+                                lng = {parseFloat(disaster.lng)}
+                                name = "things"
+                                color = "transparent"
+                            >
+                                )}
+                            </Marker>
+                        ))}
+                    </GoogleMapReact>
+                    <button className="toggle-button"
+                            onClick={() => {
+                        this.setState({
+                            showEarthquakes: true,
+                            showHurricanes: false,
+                            loading: true,
+                        });
+                        this.getEQ();
+                        this.render();
+                    }}>Earthquakes</button>
                 </div>
             );
         }

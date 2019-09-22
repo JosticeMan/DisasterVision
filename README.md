@@ -1,68 +1,14 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Inspiration
+We found that it can be difficult to visualize data to raise awareness about the damage that is done to Business Owners and Individuals and decided to take the step forward in addressing this problem. Our solution is DisasterVision, which you can find more about by reading through this story.
+## What it does
+Our goal was to make it easier for businesses and finance minded individuals to determine whether natural disasters will negatively impact them and adjust accordingly. DisasterVision displays data regarding past hurricanes and earthquakes throughout the USA (as of now, can be expanded on a global scale). It offers an interactive experience where the user can look at correlations between earthquakes and hurricanes allowing for a thoughtful analysis of the disasters' impact.
+## How I built it
+We utilized ReactJS with a expressJS backend that made calls to MongoDB and various APIs to retrieve data that was formatted through our methods and turned into a visualization. 
+## Challenges I ran into
+We had trouble implementing more data visualizations for natural disasters. In particular, it was difficult to display info windows when users clicked on a marker because of event handling. 
+## Accomplishments that I'm proud of
+We are proud to be able to take extracted data from various data sources and create meaningful visualizations that will allow users to perform thoughtful analysis..  
+## What I learned
+With 3 people that has never done full-stack development, we gained a lot of valuable experience. The project required full-stack development using the popular framework, ReactJS. We also got more exposed to ExpressJS and making various http requests to retrieve API data to format them for our visualizations. 
+## What's next for DisasterVision
+We would like to implement more user map interactions such as pop up info windows when you click on markers and expand our scope to a global scale. Being able to look at disasters through various time-frames and having various map views to better visualize the damage that was done to impacted locations.
