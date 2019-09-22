@@ -1,42 +1,53 @@
+
 const express = require('express');
 const path = require("path");
+var bodyParser = require('body-parser');
 
 const app = express();
+app.use(bodyParser.json());
 
 const MongoClient = require('mongodb').MongoClient;
 const mongoURL = "mongodb+srv://cy5914:hello123@disastervision-qrwaf.mongodb.net/test?retryWrites=true&w=majority";
 
-app.get( "/api/Hurricanes/*", ( req, res )  =>
+app.get( "/api/Hurricanes", ( req, res )  =>
     MongoClient.connect( mongoURL, function(err, db) {
-        var curURL = req.url.split("/");
+        var curURL = req.url.trim( "/" );
+        curURL = curURL.split( "/" );
         // var type = curURL[ curURL.length - 2 ]; // Hurricanes | Earthquakes
         var loc = curURL[ curURL.length - 1 ]; // Florida, California, etc
         var dbo = db.db("Disasters");
-        var query = { state: loc };
-        dbo.collection( "Hurricanes" ).find( query ).toArray(function(err, result) {
+        // var query = { state: loc };
+        var query = {};
+        dbo.collection( "Hurricanes" ).find(query).toArray((err, result) =>  {
             if (err) throw err;
+            console.log(result);
             res.send(result);
             db.close();
         });
 }) );
 
-/**
- * Format: /api/Earthquakes/<latitude>/<longitute>/<radius(km)>
- */
-app.get( "/api/Earthquakes/*", ( req, res ) => {
-   var curURL = req.url.split( "/" );
-   var len = curURL.length;
-   var r = curURL[ len - 1 ];
-   var lng = curURL[ len - 2 ];
-   var lat = curURL[ len - 3 ];
-   var URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson" + "&limit=" + 20
-    + "&latitude=" + lat + "&longitude=" + lng + "&maxradiuskm=" + r;
-   request( URL, function (error, response, body) {
-       if (!error && response.statusCode == 200) {
-           var info = JSON.parse(body);
-           res.send(info);
-       }
-   });
+app.get( "/api/Earthquakes", ( req, res ) => {
+    let mag = 5;
+    let minLat = 27.1;
+    let minLng = -123.34;
+    let maxLat = 43.9;
+    let maxLng = -63.1;
+    var today = new Date();
+    var d = today.getDate();
+    var m = today.getMonth() + 1;
+    var y = today.getFullYear();
+    var end = '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+    var start = '' + ( y - 14 ) + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+    var URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson" +
+        "&limit=" + 200 +
+        "&minlatitude=" + minLat + "&minlongitude="
+        + minLng + "&maxlatitude=" + maxLat + "&maxlongitude="
+        + maxLng + "&endtime=" + end + "&starttime=" + start + "" +
+        "&minmagnitude=" + mag;
+    var unirest = require( 'unirest' );
+    unirest.get( URL, function (req) {
+        res.status( req.status).json(req.body);
+    });
 });
 
 if (process.env.NODE_ENV === "production") {
