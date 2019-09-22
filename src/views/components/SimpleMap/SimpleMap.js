@@ -5,8 +5,6 @@ import GoogleMapReact,{InfoWindow} from "google-map-react";
 import Marker from "../Markers/Marker.js";
 import {fitBounds} from "google-map-react/utils";
 
-import * as disasterData from "./thing.json"
-
 class SimpleMap extends React.Component {
 
     constructor(props){

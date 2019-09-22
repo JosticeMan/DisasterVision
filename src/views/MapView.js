@@ -8,15 +8,23 @@ import "../styles/MapView.css";
 
 class MapView extends Component {
 
-    getHurr( state ) {
-        let url = "/api/Hurricanes/" + state;
+    getHurr( ) {
+        let url = "/api/Hurricanes/";
+        axios.get(url)
+            .then(result => {console.log(result.data)})
+            .catch(error => {console.log(error)})
+    }
+
+    getEQ( ) {
+        let url = "/api/Earthquakes/";
         axios.get(url)
             .then(result => {console.log(result.data)})
             .catch(error => {console.log(error)})
     }
 
     render() {
-        this.getHurr("TX");
+        this.getHurr();
+        this.getEQ();
         return (
             <div>
                 <SimpleMap />
