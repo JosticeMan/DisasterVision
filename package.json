@@ -5,6 +5,7 @@
   "homepage": "https://disastervision.herokuapp.com/",
   "dependencies": {
     "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
     "concurrently": "^4.1.2",
     "core-util-is": "^1.0.2",
     "express": "^4.17.1",
@@ -22,6 +23,7 @@
     "unirest": "^0.6.0",
     "yarn": "^1.17.3"
   },
+  "proxy": "http://localhost:3001",
   "scripts": {
     "client-install": "npm install",
     "start": "NODE_ENV=production node server.js",
