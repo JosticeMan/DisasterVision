@@ -1,14 +1,32 @@
-import React from "react";
+import React,{useState} from "react";
 import "./SimpleMap.css";
-import GoogleMapReact from "google-map-react";
+import GoogleMapReact,{InfoWindow} from "google-map-react";
 
 import Marker from "../Markers/Marker.js";
 import {fitBounds} from "google-map-react/utils";
 
+import * as disasterData from "./thing.json"
 
 class SimpleMap extends React.Component {
 
+    constructor(props){
+        super(props);
+        this.state = {showInfoWindow : false};
+    }
 
+    handleMouseOver = e => {
+        console.log("hi");
+        /*this.setState({
+            showInfoWindow: true
+        });*/
+    }
+
+    handleMouseExit = e => {
+        console.log("bye");
+        /*this.setState({
+            showInfoWindow: false
+        });*/
+    }
 
     static defaultProps = {
         center: {
@@ -17,6 +35,16 @@ class SimpleMap extends React.Component {
         },
         zoom: 4.7
     };
+
+    /*componentDidMount(){
+        this.watchForNativeMouseLeave();
+    }*/
+
+    /*watchForNativeMouseLeave(){
+        this.refs.hoverElement.addEventListener('mouseleave', () => {
+            this.handleMouseExit();
+        })
+    }*/
     
 
     mapOptions() {
@@ -105,8 +133,10 @@ class SimpleMap extends React.Component {
             
         }
     }
-
     render() {
+        //const [selectedMarker, setSelectedMarker] = useState(null);
+
+        //const beaches=["a place", 37.7749, -122.4194]
         const bounds = {
             nw: {
                 lat: 24.9493,
@@ -137,15 +167,31 @@ class SimpleMap extends React.Component {
                     heatmap={heatmapData}
                     options = {this.mapOptions}
                 >
-                    <Marker
-                        lat={37.7749}
-                        lng={-122.4194}
-                        name="My Marker"
-                        color="transparent"
-                    />
+                    {disasterData.features.map((disaster) => (
+                        <Marker 
+                            lat = {disaster.coordinates[0]}
+                            lng = {disaster.coordinates[1]}
+                            name = "things"
+                            color = "transparent"
+                            ref = 'hoverElement'
+                            //onMouseEnter={this.handleMouseOver}
+                            //onMouseLeave = {this.handleMouseExit}
+                        >
+                            {this.state.showInfoWindow && (
+                            <InfoWindow>
+                                <div> 
+                                    hi
+                                </div>
+                            </InfoWindow>
+                        )}
+                        </Marker>
+                    ))}
+    
+
                 </GoogleMapReact>
             </div>
         );
+
     }
 }
 
@@ -153,12 +199,14 @@ class SimpleMap extends React.Component {
 const heatmapData = {
     positions: [
         {lat: 37.7749, lng: -122.4194},
-        {lat: 37.7749, lng: -122.4194},
+        {lat: 37.7749, lng: -110.4194},
     ],
     options: {
-        radius: 20,
+        radius: 200,
         opacity: 0.6,
+        //gradient: ["green", "yellow", "red"]
     }
+    
 }
 
 export default SimpleMap;

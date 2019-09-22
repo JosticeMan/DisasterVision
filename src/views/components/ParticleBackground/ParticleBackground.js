@@ -8,7 +8,7 @@ class ParticleBackground extends Component {
         return (
             <Particles id="particle-bg"
                 style={{
-                    backgroundColor: `#000080`}}
+                    backgroundColor: `#353C51`}}
                 params={{
                     "particles": {
                         "number": {

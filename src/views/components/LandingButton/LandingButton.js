@@ -7,7 +7,7 @@ class LandingButton extends Component {
     render() {
         return (
             <div id="linkbtn">
-                <Link id="link" to="/map"> View Map </Link>
+                <Link id="link" to="/map"> SIMULATION</Link>
             </div>
         );
     }

@@ -1,8 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
 #link-bck {
     position: absolute !important;
-    color: lightskyblue;
+    color: white;
     font-size: 2vw;
     top: 0;
     left: 0;
     text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 4px;
+    padding: 8px;
+
+
+}
+
+
+#link-bck:hover{
+    color: rgb(131, 225, 225);
 }
