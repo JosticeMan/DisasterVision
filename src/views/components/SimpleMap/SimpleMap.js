@@ -165,25 +165,6 @@ class SimpleMap extends React.Component {
                     heatmap={heatmapData}
                     options = {this.mapOptions}
                 >
-                    {disasterData.features.map((disaster) => (
-                        <Marker 
-                            lat = {disaster.coordinates[0]}
-                            lng = {disaster.coordinates[1]}
-                            name = "things"
-                            color = "transparent"
-                            ref = 'hoverElement'
-                            //onMouseEnter={this.handleMouseOver}
-                            //onMouseLeave = {this.handleMouseExit}
-                        >
-                            {this.state.showInfoWindow && (
-                            <InfoWindow>
-                                <div> 
-                                    hi
-                                </div>
-                            </InfoWindow>
-                        )}
-                        </Marker>
-                    ))}
     
 
                 </GoogleMapReact>
