@@ -26,12 +26,8 @@ class SimpleMap extends React.Component {
             lat: 37.7749,
             lng: -122.4194
         },
-        zoom: 4.7
+        zoom: 4.6
     };
-
-    getDisaster(){
-
-    }
 
     getHurr( ) {
         let url = "/api/Hurricanes/";
@@ -49,7 +45,7 @@ class SimpleMap extends React.Component {
                         
                     }),
                     options: {
-                        radius: 50,
+                        radius: 40,
                         opacity: 0.6,
                     }  
                 }, loading: false}) 
@@ -72,10 +68,13 @@ class SimpleMap extends React.Component {
                         }
                         
                     }),
+                
+                    
                     options: {
-                        radius: 50,
+                        radius: 30,
                         opacity: 0.6,
                     }  
+                    
                 }, loading: false}) 
             })
             .catch(error => {console.log(error)})
@@ -203,7 +202,6 @@ class SimpleMap extends React.Component {
                         heatmap={this.state.heatMapData}
                         options = {this.mapOptions}
                     >
-                        {console.log(this.state.hurricanes)}
                         {this.state.hurricanes.map((disaster) => (
                             <Marker 
                                 lat = {parseFloat(disaster.lat)}
@@ -212,6 +210,9 @@ class SimpleMap extends React.Component {
                                 color = "transparent"
                             >
                             )}
+                                <InfoWindow>
+                                    <div> hi </div>
+                                </InfoWindow>
                             </Marker>
                         ))}
                     </GoogleMapReact>
@@ -221,8 +222,5 @@ class SimpleMap extends React.Component {
 
     }
 }
-
-
-
 
 export default SimpleMap;
