@@ -4,26 +4,21 @@ import GoogleMapReact,{InfoWindow} from "google-map-react";
 
 import Marker from "../Markers/Marker.js";
 import {fitBounds} from "google-map-react/utils";
+import axios from "axios";
 
 class SimpleMap extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {showInfoWindow : false};
-    }
-
-    handleMouseOver = e => {
-        console.log("hi");
-        /*this.setState({
-            showInfoWindow: true
-        });*/
-    }
-
-    handleMouseExit = e => {
-        console.log("bye");
-        /*this.setState({
-            showInfoWindow: false
-        });*/
+        this.state = {
+            showInfoWindow : false,
+            hurricanes : [],
+            earthquakes: [],
+            heatMapData: {positions: []}, 
+            loading : true      
+        };
+        this.getHurr(); 
+        this.getEQ();
     }
 
     static defaultProps = {
@@ -34,16 +29,58 @@ class SimpleMap extends React.Component {
         zoom: 4.7
     };
 
-    /*componentDidMount(){
-        this.watchForNativeMouseLeave();
-    }*/
+    getDisaster(){
 
-    /*watchForNativeMouseLeave(){
-        this.refs.hoverElement.addEventListener('mouseleave', () => {
-            this.handleMouseExit();
-        })
-    }*/
-    
+    }
+
+    getHurr( ) {
+        let url = "/api/Hurricanes/";
+        axios.get(url)
+            .then(result => {
+                this.setState({hurricanes: result.data});
+                
+                this.setState({heatMapData: {
+                    positions: this.state.hurricanes.map((disaster) => {
+                        
+                        return {
+                            lat: parseFloat(disaster.lat),
+                            lng: parseFloat(disaster.lng)
+                        }
+                        
+                    }),
+                    options: {
+                        radius: 50,
+                        opacity: 0.6,
+                    }  
+                }, loading: false}) 
+            })
+            .catch(error => {console.log(error)})
+    }
+
+
+    getEQ( ) {
+        let url = "/api/Earthquakes/";
+        axios.get(url)
+            .then(result => {
+                this.setState({earthquakes: result.data.features})
+                this.setState({heatMapData: {
+                    positions: this.state.earthquakes.map((disaster) => {
+                        
+                        return {
+                            lat: parseFloat(disaster.geometry.coordinates[1]),
+                            lng: parseFloat(disaster.geometry.coordinates[0])
+                        }
+                        
+                    }),
+                    options: {
+                        radius: 50,
+                        opacity: 0.6,
+                    }  
+                }, loading: false}) 
+            })
+            .catch(error => {console.log(error)})
+    }
+
 
     mapOptions() {
         return {
@@ -127,84 +164,65 @@ class SimpleMap extends React.Component {
                 stylers: [{color: '#17263c'}]
                 }
             ],
-            gestureHandling: 'none',
+            //gestureHandling: 'none',
             
         }
     }
     render() {
-        //const [selectedMarker, setSelectedMarker] = useState(null);
+        if(this.state.loading){
+            return <div> </div>
+        }
+        else{
+            //US BOUNDS
+            const bounds = {
+                nw: {
+                    lat: 24.9493,
+                    lng: -125.0011
+                },
+                se: {
+                    lat: 49.5904,
+                    lng: -75.3326//-66.9326
+                }
+            };
+            //Throwaway for bounds
+            const lasize = {
+                width: 700,
+                height: 500
+            }
+            //Get Center
+            const lacenter = fitBounds(bounds, lasize);
 
-        //const beaches=["a place", 37.7749, -122.4194]
-        const bounds = {
-            nw: {
-                lat: 24.9493,
-                lng: -125.0011
-              },
-              se: {
-                lat: 49.5904,
-                lng: -75.3326//-66.9326
-              }
-        };
-        //Throwaway
-        const lasize = {
-            width: 700,
-            height: 500
+            return (
+                // Important! Always set the container height explicitly
+                <div style = {{height: "100vh", width: "100%"}}>
+                    <GoogleMapReact
+                        bootstrapURLKeys={{key: 'AIzaSyD63DJnMsk_0ukVFEoA4hm-AkfnoE4a_3c'}}
+                        defaultCenter={lacenter.center}
+                        defaultZoom={this.props.zoom}
+                        heatmapLibrary={true}
+                        heatmap={this.state.heatMapData}
+                        options = {this.mapOptions}
+                    >
+                        {console.log(this.state.hurricanes)}
+                        {this.state.hurricanes.map((disaster) => (
+                            <Marker 
+                                lat = {parseFloat(disaster.lat)}
+                                lng = {parseFloat(disaster.lng)}
+                                name = "things"
+                                color = "transparent"
+                            >
+                            )}
+                            </Marker>
+                        ))}
+                    </GoogleMapReact>
+                </div>
+            );
         }
 
-        const lacenter = fitBounds(bounds, lasize);
-
-        return (
-            // Important! Always set the container height explicitly
-            <div style = {{height: "100vh", width: "100%"}}>
-                <GoogleMapReact
-                    bootstrapURLKeys={{key: 'AIzaSyD63DJnMsk_0ukVFEoA4hm-AkfnoE4a_3c'}}
-                    defaultCenter={lacenter.center}
-                    //center = {fitBounds(this.props.USAbounds)}
-                    defaultZoom={this.props.zoom}
-                    heatmapLibrary={true}
-                    heatmap={heatmapData}
-                    options = {this.mapOptions}
-                >
-                    {disasterData.features.map((disaster) => (
-                        <Marker 
-                            lat = {disaster.coordinates[0]}
-                            lng = {disaster.coordinates[1]}
-                            name = "things"
-                            color = "transparent"
-                            ref = 'hoverElement'
-                            //onMouseEnter={this.handleMouseOver}
-                            //onMouseLeave = {this.handleMouseExit}
-                        >
-                            {this.state.showInfoWindow && (
-                            <InfoWindow>
-                                <div> 
-                                    hi
-                                </div>
-                            </InfoWindow>
-                        )}
-                        </Marker>
-                    ))}
-    
-
-                </GoogleMapReact>
-            </div>
-        );
-
     }
 }
 
 
-const heatmapData = {
-    positions: [
-        {lat: 37.7749, lng: -122.4194},
-        {lat: 37.7749, lng: -110.4194},
-    ],
-    options: {
-        radius: 200,
-        opacity: 0.6,
-        //gradient: ["green", "yellow", "red"]
-    }
-    
-}
+
 
 export default SimpleMap;
