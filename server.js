@@ -9,14 +9,15 @@ app.use(bodyParser.json());
 const MongoClient = require('mongodb').MongoClient;
 const mongoURL = "mongodb+srv://cy5914:hello123@disastervision-qrwaf.mongodb.net/test?retryWrites=true&w=majority";
 
-app.get( "/api/Hurricanes/*", ( req, res )  =>
+app.get( "/api/Hurricanes", ( req, res )  =>
     MongoClient.connect( mongoURL, function(err, db) {
         var curURL = req.url.trim( "/" );
         curURL = curURL.split( "/" );
         // var type = curURL[ curURL.length - 2 ]; // Hurricanes | Earthquakes
         var loc = curURL[ curURL.length - 1 ]; // Florida, California, etc
         var dbo = db.db("Disasters");
-        var query = { state: loc };
+        // var query = { state: loc };
+        var query = {};
         dbo.collection( "Hurricanes" ).find(query).toArray((err, result) =>  {
             if (err) throw err;
             console.log(result);
