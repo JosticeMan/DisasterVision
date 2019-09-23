@@ -1,3 +1,9 @@
+![thumbnail](https://user-images.githubusercontent.com/25600013/65452587-87755480-de0f-11e9-9613-6524beb0e8df.PNG)
+![preview1](https://user-images.githubusercontent.com/25600013/65452524-6b71b300-de0f-11e9-84cb-c895639bc0f6.PNG)
+![preview2](https://user-images.githubusercontent.com/25600013/65452529-6d3b7680-de0f-11e9-8eb7-f47eab7996a4.PNG)
+![preview3](https://user-images.githubusercontent.com/25600013/65452532-6f053a00-de0f-11e9-83c2-1ec700f5e455.PNG)
+![preview4](https://user-images.githubusercontent.com/25600013/65452542-70cefd80-de0f-11e9-9789-057fb751ddf0.PNG)
+
 ## Inspiration
 We found that it can be difficult to visualize data to raise awareness about the damage that is done to Business Owners and Individuals and decided to take the step forward in addressing this problem. Our solution is DisasterVision, which you can find more about by reading through this story.
 ## What it does
