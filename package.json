@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://disastervision.herokuapp.com/",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "concurrently": "^4.1.2",
     "core-util-is": "^1.0.2",
